@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--namespace的值就是mapper接口的全限定名称-->
-<mapper namespace="">
+<mapper namespace="com.bjpowernode.mapper.ItemMapper">
 
 </mapper>
