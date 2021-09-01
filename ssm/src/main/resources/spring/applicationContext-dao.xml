@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--加载jdbc属性文件-->
+    <context:property-placeholder location="classpath:jdbc/db.properties"/>
+
+    <!--使用bean管理数据库连接池技术-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--配置mysql基本参数-->
+        <property name="driverClassName" value="${jdbc_driver}"/>
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_user}"/>
+        <property name="password" value="${jdbc_password}"/>
+        <!--配置连接池基本参数-->
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <property name="maxWait" value="${maxWait}"/>
+    </bean>
+
+    <!--使用bean管理mybatis的工厂对象-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--加载数据库的数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis的全局配置文件-->
+        <property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"/>
+        <!--配置pojo类的别名包扫描器-->
+        <property name="typeAliasesPackage" value="com.bjpowernode.pojo"/>
+    </bean>
+
+    <!--使用bean管理mybatis动态代理的映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--提供mybatis动态代理的包-->
+        <property name="basePackage" value="com.bjpowernode.mapper"/>
+    </bean>
+</beans>
