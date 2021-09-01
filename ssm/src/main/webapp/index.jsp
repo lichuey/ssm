@@ -16,18 +16,36 @@
     <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
     <script>
         $(function () {
-            $("#save").click(function () {
-                if (this.checked) {
+            var i = $("#save");
+            <%--if (!i.checked) {--%>
+
+            <%--} else if (i.checked) {--%>
+                <%--$("#username").val("${username}");--%>
+                <%--$("#password").val("${password}");--%>
+                <%--i.attr("checked", "checked");--%>
+            <%--}--%>
+            var count = 1;
+            i.click(function () {
+                if (count % 2 === 0) {
                     $("#username").val("${username}");
                     $("#password").val("${password}");
+                    i.attr("checked", false);
+                    count++
                 }
-            });
+                if (count % 2 === 1) {
+                    $("#username").val("");
+                    $("#password").val("");
+                    i.attr("checked", true);
+                    count++
+                }
+            })
+
         });
     </script>
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" action="login.action" method="get">
+    <form class="form-signin" action="login.action" method="post">
         <h2 class="form-signin-heading" align="center">商品管理系统</h2>
 
         <label for="username" class="sr-only">User</label>
