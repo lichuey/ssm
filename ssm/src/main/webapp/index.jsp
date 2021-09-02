@@ -13,35 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/examples/signin/signin.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/assets/js/ie-emulation-modes-warning.js"></script>
-    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-    <script>
-        $(function () {
-            var i = $("#save");
-            <%--if (!i.checked) {--%>
-
-            <%--} else if (i.checked) {--%>
-                <%--$("#username").val("${username}");--%>
-                <%--$("#password").val("${password}");--%>
-                <%--i.attr("checked", "checked");--%>
-            <%--}--%>
-            var count = 1;
-            i.click(function () {
-                if (count % 2 === 0) {
-                    $("#username").val("${username}");
-                    $("#password").val("${password}");
-                    i.attr("checked", false);
-                    count++
-                }
-                if (count % 2 === 1) {
-                    $("#username").val("");
-                    $("#password").val("");
-                    i.attr("checked", true);
-                    count++
-                }
-            })
-
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -49,14 +20,14 @@
         <h2 class="form-signin-heading" align="center">商品管理系统</h2>
 
         <label for="username" class="sr-only">User</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required="" autofocus="">
+        <input type="text" id="username" name="username" value="${param.username}" class="form-control" placeholder="用户名" required="" autofocus="">
 
         <label for="password" class="sr-only">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="密码" required="">
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" id="save" name="save" value="save"> 保存用户名和密码
+                <input type="checkbox" id="save" name="reMemberMe" value="1" ${param.reMemberMe eq 1 ? "checked":""}> 保存用户名
             </label>
         </div>
 
