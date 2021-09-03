@@ -18,7 +18,7 @@ public class UserController {
         Boolean result = userService.findUsernameAndPassword(user.getUsername(), user.getPassword());
         if (result) {
             //账号密码正确，返回到商品列表页面
-            return "redirect:itemList.action";
+            return "redirect:item/itemList.action";
         } else {
             //账号密码错误，返回到登录页面
             return "forward:index.jsp";

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>商品列表页面</title>
@@ -14,7 +15,16 @@
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/examples/dashboard/dashboard.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/assets/js/ie-emulation-modes-warning.js"></script>
     <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="js/attr.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/attr.js"></script>
+    <script>
+        function toAddAction() {
+            window.location.href = "${pageContext.request.contextPath}/item/add.action";
+        }
+        function del(i_id) {
+            if (confirm("确定删除此商品吗？"))
+                window.location.href = "${pageContext.request.contextPath}/item/delete.action?i_id=" + i_id;
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,10 +41,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">查询商品</a></li>
-                    <li><a href="#">添加商品</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="搜索">
+                    <input type="text" class="form-control" placeholder="按商品名称查询">
                 </form>
             </div>
         </div>
@@ -44,7 +53,7 @@
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                     <%--<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>--%>
-                    <li id="1" class="active"><a href="#" onclick="attr1()">主页面</a></li>
+                    <li id="1" class="active"><a href="${pageContext.request.contextPath}/item/itemList.action" onclick="attr1()">所有商品信息</a></li>
                     <li id="2"><a href="#" onclick="attr2()" >Reports</a></li>
                     <li id="3"><a href="#" onclick="attr3()" >Reports</a></li>
                     <li id="4"><a href="#" onclick="attr4()" >Reports</a></li>
@@ -65,6 +74,10 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
                 <h2 class="sub-header">商品列表</h2>
+                <!--跳转添加商品页面-->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="toAddAction()">
+                    添加商品
+                </button>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -75,10 +88,26 @@
                             <th>商品描述</th>
                             <th>商品图片</th>
                             <th>商店</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                            <c:forEach items="${itemList}" var="item" varStatus="sta">
+                                <tr>
+                                    <td>${sta.index + 1}</td>
+                                    <td>${item.i_name}</td>
+                                    <td>${item.i_price}</td>
+                                    <td>${item.i_describe}</td>
+                                    <td>${item.i_picture}</td>
+                                    <td>${item.store.s_name}</td>
+                                    <td>
+                                        <%--跳转编辑商品页面--%>
+                                        <a href="edit.action?i_id=${item.i_id}" class="btn btn-primary btn-lg active" role="button">编辑</a>
+                                        <%--跳转删除商品页面--%>
+                                        <a href="javascript:del(${item.i_id})" class="btn btn-primary btn-lg active" role="button">删除</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

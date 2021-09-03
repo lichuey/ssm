@@ -48,8 +48,8 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="密码" required="" style="float: left;width: 300px;margin-bottom:0">
             &nbsp;&nbsp;<button id="button1" type="button" class="btn btn-default" aria-label="Left Align"  onclick="show()">
-                <%--<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>--%>
-                    <span id="btn1Span" class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            <%--<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>--%>
+                            <span id="btn1Span" class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </button>
         </div>
 

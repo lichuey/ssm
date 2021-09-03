@@ -1,9 +1,13 @@
 package com.bjpowernode.service.impl;
 
+import com.bjpowernode.mapper.ItemMapper;
 import com.bjpowernode.mapper.UserMapper;
+import com.bjpowernode.pojo.Item;
 import com.bjpowernode.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

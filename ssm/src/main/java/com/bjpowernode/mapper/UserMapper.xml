@@ -4,6 +4,7 @@
 <!--namespace的值就是mapper接口的全限定名称-->
 <mapper namespace="com.bjpowernode.mapper.UserMapper">
 
+    <!--判断账号密码是否正确-->
     <select id="selectUsernameAndPassword" resultType="int">
         select count(0) from user where username = #{username} and password = #{password};
     </select>

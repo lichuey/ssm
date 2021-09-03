@@ -4,4 +4,35 @@
 <!--namespace的值就是mapper接口的全限定名称-->
 <mapper namespace="com.bjpowernode.mapper.ItemMapper">
 
+    <resultMap id="BaseResultMap" type="com.bjpowernode.pojo.Item">
+        <id column="i_id" property="i_id"/>
+        <result column="s_id" property="store.s_id"/>
+        <result column="s_name" property="store.s_name"/>
+    </resultMap>
+
+    <!--查询所有商品-->
+    <select id="selectAllItem" resultMap="BaseResultMap">
+        select item.*,store.s_name from item left join store on item.s_id = store.s_id;
+    </select>
+
+    <!--添加商品-->
+    <!--INSERT into item VALUES (null,'洗衣机',2000.00,'飞科','123.png',1)-->
+    <insert id="insertItem">
+        insert into item values (null ,#{i_name},#{i_price},#{i_describe},#{i_picture},#{store.s_id})
+    </insert>
+
+    <!--通过ID查询商品-->
+    <select id="selectItemById" resultType="item">
+        select item.* from item where i_id = #{i_id};
+    </select>
+
+    <!--修改商品-->
+    <update id="updateItem">
+        update item set i_name = #{i_name},i_price = #{i_price},i_describe = #{i_describe},i_picture = #{i_picture},s_id = #{store.s_id} where i_id = #{i_id};
+    </update>
+
+    <!--通过ID删除商品-->
+    <delete id="deleteItemById">
+        delete from item where i_id = #{i_id};
+    </delete>
 </mapper>
