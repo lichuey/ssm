@@ -28,6 +28,13 @@ public class ItemController {
         beanList.addAll(list);
     }
 
+    //按商品名称查询商品
+    @RequestMapping("itemListByName")
+    String itemListByName(ArrayList<Item> list,String itemName) {
+        list.addAll(itemService.findAllItemByName(itemName));
+        return "item/itemList";
+    }
+
     //添加商品前的准备
     @RequestMapping("add")
     List<Store> add() {

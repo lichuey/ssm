@@ -39,11 +39,10 @@
                 <a class="navbar-brand" href="#">商品管理系统</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">查询商品</a></li>
-                </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="按商品名称查询">
+                <form class="navbar-form navbar-right" action="itemListByName.action" method="post">
+                    <input type="text" class="form-control" name="itemName" placeholder="按商品名称查询">
+                    <%--按商品名称查询商品--%>
+                    <button type="submit" class="btn" style="background-color: black;color: white;border: 1px solid wheat">查询商品</button>
                 </form>
             </div>
         </div>

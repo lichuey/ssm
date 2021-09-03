@@ -15,6 +15,11 @@
         select item.*,store.s_name from item left join store on item.s_id = store.s_id;
     </select>
 
+    <!--按商品名称查询商品-->
+    <select id="selectItemByName" resultMap="BaseResultMap">
+        select item.*,store.s_name from item left join store on item.s_id = store.s_id where i_name like "%" #{itemName} "%"
+    </select>
+
     <!--添加商品-->
     <!--INSERT into item VALUES (null,'洗衣机',2000.00,'飞科','123.png',1)-->
     <insert id="insertItem">

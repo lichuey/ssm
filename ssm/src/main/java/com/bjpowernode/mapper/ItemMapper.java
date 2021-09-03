@@ -20,4 +20,7 @@ public interface ItemMapper {
 
     //通过ID删除商品
     void deleteItemById(int i_id);
+
+    //按商品名称查询商品
+    ArrayList<Item> selectItemByName(String itemName);
 }

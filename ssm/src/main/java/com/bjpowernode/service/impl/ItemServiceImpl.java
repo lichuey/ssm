@@ -20,6 +20,12 @@ public class ItemServiceImpl implements ItemService {
         return itemMapper.selectAllItem();
     }
 
+    //按商品名称查询商品
+    @Override
+    public ArrayList<Item> findAllItemByName(String itemName) {
+        return itemMapper.selectItemByName(itemName);
+    }
+
     //添加商品
     @Override
     public void addItem(Item item) {
