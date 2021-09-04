@@ -11,6 +11,12 @@
     <!--配置注解驱动-->
     <mvc:annotation-driven/>
 
+    <!--配置一个多媒体解析器，其中id必须得有-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--给定上传文件的大小-->
+        <property name="maxInMemorySize" value="9000000"/>
+    </bean>
+
     <!--配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--前缀-->

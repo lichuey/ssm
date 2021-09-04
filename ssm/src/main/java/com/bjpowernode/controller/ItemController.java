@@ -7,9 +7,15 @@ import com.bjpowernode.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("item")
@@ -44,7 +50,8 @@ public class ItemController {
 
     //添加商品
     @RequestMapping("addItem")
-    String addItem(Item item) {
+    String addItem(Item item, @RequestParam("picName") MultipartFile picName) throws IOException {
+        getNewName(item, picName);
         itemService.addItem(item);
         return "redirect:itemList.action";
     }
@@ -59,8 +66,9 @@ public class ItemController {
     }
 
     //修改商品
-    @RequestMapping("editItem")
-    String editItem(Item item) {
+    @RequestMapping(value = "editItem",method = RequestMethod.POST)
+    String editItem(Item item, @RequestParam("picName") MultipartFile picName) throws IOException {
+        getNewName(item, picName);
         itemService.editItem(item);
         return "redirect:itemList.action";
     }
@@ -70,5 +78,23 @@ public class ItemController {
     String delete(int i_id) {
         itemService.deleteItemById(i_id);
         return "redirect:itemList.action";
+    }
+
+    //获取新名字
+    private void getNewName(Item item, @RequestParam("picName") MultipartFile picName) throws IOException {
+        //新名字不加后缀
+        String nowNameNotSux = UUID.randomUUID().toString();
+        //获取老名字
+        String oldName = picName.getOriginalFilename();
+        //获取老名字后缀
+        String sux = oldName.substring(oldName.lastIndexOf("."));
+        //得到新名字
+        String nowName = nowNameNotSux + sux;
+        //创建文件流
+        File file = new File("D:\\webWork\\" + nowName);
+        //将文件写入本地
+        picName.transferTo(file);
+        //更新名字
+        item.setI_picture(nowName);
     }
 }

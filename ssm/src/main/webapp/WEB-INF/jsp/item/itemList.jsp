@@ -97,7 +97,9 @@
                                     <td>${item.i_name}</td>
                                     <td>${item.i_price}</td>
                                     <td>${item.i_describe}</td>
-                                    <td>${item.i_picture}</td>
+                                    <td>
+                                        <img src="/pic/${item.i_picture}" class="img-rounded" style="height: 60px;width: 60px" alt="">
+                                    </td>
                                     <td>${item.store.s_name}</td>
                                     <td>
                                         <%--跳转编辑商品页面--%>

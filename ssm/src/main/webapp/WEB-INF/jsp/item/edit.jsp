@@ -11,7 +11,7 @@
         <h2 align="center">编辑商品</h2>
         <div class="container" style="border:1px solid black">
 
-            <form action="editItem.action" role="form" class="form-horizontal">
+            <form action="editItem.action" role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
 
                 <div class="form-group">
                     <label for="i_name" class="control-label col-sm-2 col-sm-offset-3">商品名称</label>
@@ -37,7 +37,10 @@
                 <div class="form-group">
                     <label for="i_picture" class="control-label col-sm-2 col-sm-offset-3">商品图片</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="i_picture" name="i_picture" value="${item.i_picture}" placeholder="请输入商品图片">
+                        <c:if test="${item.i_picture != null}">
+                            <img src="/pic/${item.i_picture}" width="100px" alt="无法显示图片"/>
+                        </c:if>
+                        <input type="file" class="form-control" id="i_picture" name="picName">
                     </div>
                 </div>
 
