@@ -17,14 +17,15 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/attr.js"></script>
     <script>
+        // 跳转到添加商品界面
         function toAddAction() {
             window.location.href = "${pageContext.request.contextPath}/item/add.action";
         }
+        //删除商品
         function del(i_id) {
             if (confirm("确定删除此商品吗？"))
                 window.location.href = "${pageContext.request.contextPath}/item/delete.action?i_id=" + i_id;
         }
-
         $(function () {
             //加载完成显示时间
             $.ajax({
@@ -56,8 +57,25 @@
             });
         });
     </script>
+    <script>
+        //暂停音频播放
+        function pauseMusic() {
+            var player = $("#music")[0]; /*jquery对象转换成js对象*/
+            if (player.paused){ /*如果已经暂停*/
+                player.play(); /*播放*/
+            }else {
+                player.pause();/*暂停*/
+            }
+        }
+    </script>
 </head>
 <body>
+    <%--音频播放--%>
+    <div style="float: left">
+        <audio id="music" controls="controls" autoplay="autoplay" style="display:none">
+            <source src="${pageContext.request.contextPath}/music/music.mp3" type="audio/mpeg" />
+        </audio>
+    </div>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -79,7 +97,13 @@
                     <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                 </button>
             </div>
-
+            <%--音频播放按钮--%>
+            <div style="float: left">
+                <button type="button" onclick="pauseMusic()" style="background-color: black;color: white;font-size: 10px;position: relative;top: 17px;left: 10px">
+                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                </button>
+            </div>
+            <%--搜索框--%>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right" action="itemListByName.action" method="post">
                     <input type="text" class="form-control" name="itemName" placeholder="按商品名称查询">
@@ -87,6 +111,7 @@
                     <button type="submit" class="btn" style="background-color: black;color: white;border: 1px solid wheat">查询商品</button>
                 </form>
             </div>
+
         </div>
     </nav>
     <div class="container-fluid">

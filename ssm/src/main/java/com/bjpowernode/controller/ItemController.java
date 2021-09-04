@@ -32,7 +32,7 @@ public class ItemController {
     private StoreService storeService;
 
     //展现时间
-    @RequestMapping(value = "showtime",produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "showtime",produces = "text/html;charset=UTF-8")//解决中文乱码问题
     @ResponseBody
     public String showtime() {
         //添加数据
