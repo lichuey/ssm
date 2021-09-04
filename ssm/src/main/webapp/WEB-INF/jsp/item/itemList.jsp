@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/examples/dashboard/dashboard.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@bootcss/v3.bootcss.com@1.0.14/assets/js/ie-emulation-modes-warning.js"></script>
-    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/attr.js"></script>
     <script>
         function toAddAction() {
@@ -24,6 +24,37 @@
             if (confirm("确定删除此商品吗？"))
                 window.location.href = "${pageContext.request.contextPath}/item/delete.action?i_id=" + i_id;
         }
+
+        $(function () {
+            //加载完成显示时间
+            $.ajax({
+                url: "showtime.action",
+                type: "get",
+                dataType: "text",
+
+                success: function (time) {
+                    //清空数据
+                    $("#time").html("");
+                    //展现数据
+                    $("#time").html(time);
+                }
+            });
+            //点击按钮刷新显示时间
+            $("#timeBtn").click(function () {
+                $.ajax({
+                    url: "showtime.action",
+                    type: "get",
+                    dataType: "text",
+
+                    success: function (time) {
+                        //清空数据
+                        $("#time").html("");
+                        //展现数据
+                        $("#time").html(time);
+                    }
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -38,6 +69,17 @@
                 </button>
                 <a class="navbar-brand" href="#">商品管理系统</a>
             </div>
+            <%--展现时间--%>
+            <div class="navbar-collapse collapse" style="float: left">
+                <span id="time" style="color: white;font-size: 10px;position: relative;top: 17px;"></span>
+            </div>
+            <%--时间刷新按钮--%>
+            <div style="float: left">
+                <button id="timeBtn" type="button" style="background-color: black;color: white;font-size: 10px;position: relative;top: 17px;left: 10px">
+                    <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                </button>
+            </div>
+
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right" action="itemListByName.action" method="post">
                     <input type="text" class="form-control" name="itemName" placeholder="按商品名称查询">
