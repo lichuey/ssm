@@ -67,6 +67,40 @@
                 player.pause();/*暂停*/
             }
         }
+        //改变播放音乐
+        function changeMusicToMusic1() {
+            document.getElementById("music").setAttribute("src", "${pageContext.request.contextPath}/music/music1.mp3");
+            var player = $("#music")[0]; /*jquery对象转换成js对象*/
+            if (player.paused){ /*如果已经暂停*/
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-up");
+                player.play(); /*播放*/
+            }else {
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-off");
+                player.pause();/*暂停*/
+            }
+        }
+        function changeMusicToMusic2() {
+            document.getElementById("music").setAttribute("src", "${pageContext.request.contextPath}/music/music2.mp3");
+            var player = $("#music")[0]; /*jquery对象转换成js对象*/
+            if (player.paused){ /*如果已经暂停*/
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-up");
+                player.play(); /*播放*/
+            }else {
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-off");
+                player.pause();/*暂停*/
+            }
+        }
+        function changeMusicToMusic3() {
+            document.getElementById("music").setAttribute("src", "${pageContext.request.contextPath}/music/music3.mp3");
+            var player = $("#music")[0]; /*jquery对象转换成js对象*/
+            if (player.paused){ /*如果已经暂停*/
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-up");
+                player.play(); /*播放*/
+            }else {
+                document.getElementById("musicIconChange").setAttribute("class","glyphicon glyphicon-volume-off");
+                player.pause();/*暂停*/
+            }
+        }
     </script>
 </head>
 <body>
@@ -102,6 +136,23 @@
                 <button type="button" onclick="pauseMusic()" style="background-color: black;color: white;font-size: 10px;position: relative;top: 17px;left: 10px">
                     <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
                 </button>
+            </div>
+            <%--选择音乐下拉框--%>
+            <div class="dropdown" style="float: left;">
+                <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="dropdown" style="background-color: black;color: white;font-size: 10px;position: relative;top: 17px;left: 10px;padding: 1px 6px">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="javascript:changeMusicToMusic1()">霜雪千年</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="javascript:changeMusicToMusic2()">红昭愿</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="javascript:changeMusicToMusic3()">莫问天明</a>
+                    </li>
+                </ul>
             </div>
             <%--搜索框--%>
             <div id="navbar" class="navbar-collapse collapse">
